@@ -19,10 +19,9 @@ select w.nazwa, sum(e.ilosc) from wyprawa w inner join uczestnicy u on w.id_wypr
 # Zadanie 2
 Dla każdej wyprawy wypisz jej nazwę, liczbę uczestników, oraz nazwy tych uczestników w jednej linii.
 ```sql
-SELECT w.nazwa, COUNT(u.id_uczestnika), 
-GROUP_CONCAT(p.nazwa ORDER BY p.nazwa ASC SEPARATOR ', ')
-FROM wyprawa w left JOIN uczestnicy u ON w.id_wyprawy = u.id_wyprawy left JOIN postac p ON u.id_uczestnika = p.id_postac
-GROUP BY w.nazwa;
+select w.nazwa, count(u.id_uczestnika), group_concat(k.nazwa order by k.nazwa asc separator ', ')
+from wyprawa w left join uczestnicy u on w.id_wyprawy = u.id_wyprawy left join kreatura k on u.id_uczestnika = k.idKreatury
+group by w.id_wyprawy, w.nazwa;
 ```
 2. Wypisz kolejne etaty wszystkich wypraw wraz z nazwami sektorów, sortując najpierw według daty początku wyprawy, a następnie według kolejności występowania etapów. W każdym etapie określ nazwę kierownika danej wyprawy.
 ```sql
